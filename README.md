@@ -1,1 +1,0 @@
-# pacman-allegro5
