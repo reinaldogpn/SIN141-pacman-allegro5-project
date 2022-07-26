@@ -47,6 +47,9 @@ ifeq ($(OS),Windows_NT)
 # Nome do projeto
 PROJ_NAME=Pacman.exe
 
+# Icon para o .exe
+ICON=./doc/.icon.o
+
 # Link .dll
 DLL_LINK=https://github.com/reinaldogpn/pacman-allegro5/raw/main/allegro_monolith-5.2.dll
 
@@ -60,7 +63,7 @@ ALLEGRO_LIB=$(ALLEGRO_PATH)\lib\liballegro_monolith.dll.a
 $(PROJ_NAME): $(OBJ)
 	@ echo =======================================================================================
 	@ echo Gerando binarios utilizando o $(CC) ...
-	@ $(CC) $^ -o $@ $(ALLEGRO_LIB)
+	@ $(CC) $^ $(ICON) -o $@ $(ALLEGRO_LIB)
 	@ echo =======================================================================================
 	@ echo Tudo certo! Arquivo executavel gerado: $@
 	@ echo =======================================================================================
