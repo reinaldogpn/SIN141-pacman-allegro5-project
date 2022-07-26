@@ -48,7 +48,7 @@ ifeq ($(OS),Windows_NT)
 PROJ_NAME=Pacman.exe
 
 # Icon para o .exe
-ICON=./doc/.icon.o
+ICON=./doc/icon.o
 
 # Link .dll
 DLL_LINK=https://github.com/reinaldogpn/pacman-allegro5/raw/main/allegro_monolith-5.2.dll
