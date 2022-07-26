@@ -32,14 +32,6 @@ void Pinky::moveCharacter(Character* Player, Map& M)
     int Xb = Player->getPX();
     int Yb = Player->getPY();
 
-    vector<int> vDir{0};
-
-    double dist_atual = calcDistance(Xa, Xb, Ya, Yb);
-    double dist_dir = calcDistance(Xa+1, Xb, Ya, Yb);
-    double dist_esq = calcDistance(Xa-1, Xb, Ya, Yb);
-    double dist_abaixo = calcDistance(Xa, Xb, Ya+1, Yb);
-    double dist_acima = calcDistance(Xa, Xb, Ya-1, Yb);
-
     /** ALGORITMO BÁSICO DE PERSEGUIÇÃO **/
 
     if(Xa > Xb) // fantasma à direita do pacman
@@ -48,34 +40,12 @@ void Pinky::moveCharacter(Character* Player, Map& M)
         {
             intention = LEFT;
         }
-        else
-        {
-            if(dist_acima < dist_abaixo && !M.mapCollision(Xa, Ya, UP))
-            {
-                intention = UP;
-            }
-            else if(dist_abaixo < dist_acima && !M.mapCollision(Xa, Ya, DOWN))
-            {
-                intention = DOWN;
-            }
-        }
     }
     else if(Xa < Xb) // fantasma à esquerda do pacman
     {
         if(!M.mapCollision(Xa, Ya, RIGHT))
         {
             intention = RIGHT;
-        }
-        else
-        {
-            if(dist_acima < dist_abaixo && !M.mapCollision(Xa, Ya, UP))
-            {
-                intention = UP;
-            }
-            else if(dist_abaixo < dist_acima && !M.mapCollision(Xa, Ya, DOWN))
-            {
-                intention = DOWN;
-            }
         }
     }
 
@@ -85,34 +55,12 @@ void Pinky::moveCharacter(Character* Player, Map& M)
         {
             intention = UP;
         }
-        else
-        {
-            if(dist_esq < dist_dir && !M.mapCollision(Xa, Ya, LEFT))
-            {
-                intention = LEFT;
-            }
-            else if(dist_dir < dist_esq && !M.mapCollision(Xa, Ya, RIGHT))
-            {
-                intention = RIGHT;
-            }
-        }
     }
     else if(Ya < Yb) // fantasma acima do pacman
     {
         if(!M.mapCollision(Xa, Ya, DOWN))
         {
             intention = DOWN;
-        }
-        else
-        {
-            if(dist_esq < dist_dir && !M.mapCollision(Xa, Ya, LEFT))
-            {
-                intention = LEFT;
-            }
-            else if(dist_dir < dist_esq && !M.mapCollision(Xa, Ya, RIGHT))
-            {
-                intention = RIGHT;
-            }
         }
     }
 
