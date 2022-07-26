@@ -1,5 +1,15 @@
 # Pac-Man Allegro 5 / C++
 
-Um projeto desenvolvido para a disciplina de Computação Orientada a Objetos (SIN 141) do curso de Sistemas de Informação na Universidade Federal de Viçosa (UFV/CRP).
+A college project developed for Object-Oriented Programming discipline (SIN 141) of the Information Systems course at Federal University of Viçosa (UFV/CRP).
 
-Github: https://www.github.com/reinaldogpn/pacman-allegro5
+#
+This project's idea is an implementation of the classic game Pac-Man using Allegro 5 libraries and also C++ object-orientation concepts, such as:
+
+- Classes
+- Class inheritance
+- Composition
+- Data abstraction
+- Polymorphism
+
+#
+(...)
