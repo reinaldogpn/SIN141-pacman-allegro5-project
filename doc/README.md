@@ -8,7 +8,7 @@ Projeto implementado por: Reinaldo Gonçalves Pereira Neto | Matrícula: 7627
 	
 **********************************************************************************
 
-# ESTRATÉGIA DE PERSEGUIÇÃO
+# Estratégia de Perseguição
 
 Esse estilo de movimento é utilizado pelos fantasmas Blinky (vermelho) e Pinky (rosa).
 
