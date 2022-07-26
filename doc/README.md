@@ -1,5 +1,4 @@
-Pac-Man Allegro 5 / C++
-#
+# Pac-Man Allegro 5 / C++
 
 Um projeto desenvolvido para a disciplina de Computação Orientada a Objetos (SIN 141) do curso de Sistemas de Informação na Universidade Federal de Viçosa (UFV/CRP).
 
@@ -9,7 +8,7 @@ Projeto implementado por: Reinaldo Gonçalves Pereira Neto | Matrícula: 7627
 	
 **********************************************************************************
 
-** ESTRATÉGIA DE PERSEGUIÇÃO **
+# ESTRATÉGIA DE PERSEGUIÇÃO
 
 Esse estilo de movimento é utilizado pelos fantasmas Blinky (vermelho) e Pinky (rosa).
 
