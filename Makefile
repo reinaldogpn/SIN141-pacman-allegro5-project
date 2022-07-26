@@ -16,18 +16,18 @@
 # "objects" na pasta raiz do projeto, onde estarão contidos os arquivos .o gerados. Além disso, será 
 # gerado um arquivo executável com o nome definido na variável 'PROJ_NAME'.
 #
-# Ao chamar o comando "make run" no terminal, o programa é executado.
-#-------------------------------------------------------------------------------------------------------
-## Definições globais ##
+# Ao chamar o comando "make run", o programa é compilado (se necessário) e em seguida, executado.
+#-------------------------------------------------------------------------------------------------------#
+## Definições globais I ##
 
-# Indica que ao usar o comando "make", serão executados os passos definidos em "build"
-.DEFAULT_GOAL := build
+# Indica que ao usar o comando "make", serão executadas as instruções definidas em "build"
+.DEFAULT_GOAL := all
 
 # Compilador / linker
 CC=g++
 
 # Flags para o compilador
-CC_FLAGS=-std=c++11 -c -s -w -O2
+CC_FLAGS=-std=gnu++11 -c -s -w -O2
 
 # Arquivos .cpp
 C_SOURCE=$(wildcard ./source/*.cpp)
@@ -41,16 +41,14 @@ OBJ=$(subst .cpp,.o,$(subst source,objects,$(C_SOURCE)))
 #-------------------------------------------------------------------------------------------------------#
 ## Condicionais ##
 
+# As instruções abaixo são executadas somente se o SO for Windows
 ifeq ($(OS),Windows_NT)
 
 # Nome do projeto
 PROJ_NAME=Pacman.exe
 
-# Icon
-ICON=./doc/.info.o
-
 # Link .dll
-DLL_LINK=https://github.com/reinaldogpn/makefile/raw/main/allegro_monolith-5.2.dll
+DLL_LINK=https://github.com/reinaldogpn/pacman-allegro5/raw/main/allegro_monolith-5.2.dll
 
 # Flags para o Allegro 5
 ALLEGRO_PATH=C:\allegro
@@ -59,13 +57,10 @@ ALLEGRO_INCLUDE=-I $(ALLEGRO_PATH)\include
 
 ALLEGRO_LIB=$(ALLEGRO_PATH)\lib\liballegro_monolith.dll.a
 
-# Compilação e linkedição
-build: objFolder $(PROJ_NAME)
-
 $(PROJ_NAME): $(OBJ)
 	@ echo =======================================================================================
 	@ echo Gerando binarios utilizando o $(CC) ...
-	@ $(CC) $^ $(ICON) -o $@ $(ALLEGRO_LIB)
+	@ $(CC) $^ -o $@ $(ALLEGRO_LIB)
 	@ echo =======================================================================================
 	@ echo Tudo certo! Arquivo executavel gerado: $@
 	@ echo =======================================================================================
@@ -90,39 +85,36 @@ $(PROJ_NAME): $(OBJ)
 
 # Criação de uma pasta para guardar os arquivos .o
 objFolder:
-	@ mkdir objects
+	@ if not exist objects mkdir objects
 
 # Execução do programa ao usar "make run"
-run:
+run: all
 	@ echo =======================================================================================
 	@ echo Executando o programa: $(PROJ_NAME)
 	@ echo =======================================================================================
 	@ $(PROJ_NAME)
 
-# Compila e executa o programa
-all: build run
-
 # Faz a limpeza dos arquivos
 clean:
-	@ del /Q $(PROJ_NAME)
-	@ rmdir /S /Q objects
+	@ if exist $(PROJ_NAME) del /Q $(PROJ_NAME)
+	@ if exist objects rmdir /S /Q objects
 
 else
 
+# As instruções abaixo são executadas somente se o SO for Linux.
     UNAME_S := $(shell uname -s)
 
     ifeq ($(UNAME_S),Linux)
         
         DISTRO_VER := $(shell cat /etc/issue)
-            
+		
+# O parâmetro "-e" é adicionado ao comando "echo" se o SO for Arch Linux para as cores funcionarem corretamente.
         ifeq ($(DISTRO_VER),Arch Linux \r (\l))
             
-             OPT_FLAG=-e
-
+             ECHO_FLAG=echo -e
         else
 
-             OPT_FLAG=
-
+             ECHO_FLAG=echo
         endif
 
 # Nome do projeto
@@ -157,14 +149,14 @@ ALLEGRO_INCLUDE=-I/usr/include/allegro5
 # Blue=			"34"
 # Magenta=		"35"
 # Cyan=			"36"
-# LightGray=		"37"
+# LightGray=	"37"
 # Gray=			"90"
 # LightRed=		"91"
-# LightGreen=		"92"
-# LightYellow=	        "93"
-# LightBlue=		"94"
-# LightMagenta=	        "95"
-# LightCyan=		"96"
+# LightGreen=	"92"
+# LightYellow=	"93"
+# LightBlue=	"94"
+# LightMagenta=	"95"
+# LightCyan=	"96"
 # White=		"97"
 
 # Color code
@@ -178,27 +170,24 @@ UNDERLINE="\e[4m"
 BLINK="\e[5m"
 DIM="\e[2m"
 
-# Compilação e linkedição
-build: objFolder $(PROJ_NAME)
-
 $(PROJ_NAME): $(OBJ)
-	@ echo $(OPT_FLAG) $(COLOR_BOLD)"Gerando binários utilizando o $(CC) ..."$(NO_COLOR)
+	@ $(ECHO_FLAG) $(COLOR_BOLD)"Gerando binários utilizando o $(CC) ..."$(NO_COLOR)
 	@ $(CC) $^ -o $@ $(ALLEGRO_INCLUDE) $(ALLEGRO_FLAGS)
-	@ echo $(OPT_FLAG) ''
-	@ echo $(OPT_FLAG) $(COLOR_BOLD)"Criação de binários finalizada! Arquivo executável gerado:"$(NO_COLOR)
-	@ echo $(OPT_FLAG) $(COLOR_BOLD)"-->" $(UNDERLINE)$@$(NO_COLOR)
-	@ echo $(OPT_FLAG) ''
+	@ $(ECHO_FLAG) ''
+	@ $(ECHO_FLAG) $(COLOR_BOLD)"Criação de binários finalizada! Arquivo executável gerado:"$(NO_COLOR)
+	@ $(ECHO_FLAG) $(COLOR_BOLD)"-->" $(UNDERLINE)$@$(NO_COLOR)
+	@ $(ECHO_FLAG) ''
 
 ./objects/%.o: ./source/%.cpp ./source/%.h
-	@$ echo $(OPT_FLAG) $(COLOR_BOLD)"Linkando o arquivo alvo utilizando o $(CC):" $(COLOR)$<$(NO_COLOR)
+	@ $(ECHO_FLAG) $(COLOR_BOLD)"Linkando o arquivo alvo utilizando o $(CC):" $(COLOR)$<$(NO_COLOR)
 	@ $(CC) $< $(CC_FLAGS) -o $@ $(ALLEGRO_INCLUDE) $(ALLEGRO_FLAGS)
 
 ./objects/main.o: ./source/main.cpp $(H_SOURCE)
-	@ echo $(OPT_FLAG) $(COLOR_BOLD)"Linkando o arquivo main utilizando o $(CC):" $(COLOR)$<$(NO_COLOR)
+	@ $(ECHO_FLAG) $(COLOR_BOLD)"Linkando o arquivo main utilizando o $(CC):" $(COLOR)$<$(NO_COLOR)
 	@ $(CC) $< $(CC_FLAGS) -o $@ $(ALLEGRO_INCLUDE) $(ALLEGRO_FLAGS)
 
 ./objects/Main.o: ./source/Main.cpp $(H_SOURCE)
-	@ echo $(OPT_FLAG) $(COLOR_BOLD)"Linkando o arquivo main utilizando o $(CC):" $(COLOR)$<$(NO_COLOR)
+	@ $(ECHO_FLAG) $(COLOR_BOLD)"Linkando o arquivo main utilizando o $(CC):" $(COLOR)$<$(NO_COLOR)
 	@ $(CC) $< $(CC_FLAGS) -o $@ $(ALLEGRO_INCLUDE) $(ALLEGRO_FLAGS)
 
 # Criação de uma pasta para guardar os arquivos .o
@@ -206,21 +195,23 @@ objFolder:
 	@ mkdir -p objects
 
 # Executa o arquivo gerado
-run:
-	@ echo $(OPT_FLAG) $(COLOR_BOLD)"Executando o arquivo gerado:" $(UNDERLINE)$(PROJ_NAME)$(NO_COLOR)
-	@ echo $(OPT_FLAG) ''
+run: all
+	@ $(ECHO_FLAG) $(COLOR_BOLD)"Executando o arquivo gerado:" $(UNDERLINE)$(PROJ_NAME)$(NO_COLOR)
+	@ $(ECHO_FLAG) ''
 	@ ./$(PROJ_NAME)
 
-# Compila e executa o programa
-all: build run
-
 clean:
-	@ rm -rf ./objects/*.o $(PROJ_NAME) *~
-	@ rmdir objects
+	@ rm -rf objects $(PROJ_NAME) *~
 
      endif
-     
 endif
+
+#-------------------------------------------------------------------------------------------------------#
+## Definições globais II ##
+
+# Compilação e linkedição
+all: objFolder $(PROJ_NAME)
 
 # Palavras declaradas como "alvo falso"
 .PHONY: all clean
+#-------------------------------------------------------------------------------------------------------#
