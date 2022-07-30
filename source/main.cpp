@@ -1,5 +1,4 @@
 #include "map.h"
-#include "character.h"
 #include "pacman.h"
 #include "blinky.h"
 #include "pinky.h"
@@ -448,17 +447,17 @@ int main(void)
                 /** MOVIMENTAÇÃO DO FANTASMA BLINKY */
 
                 // Faz com que o Blinky alterne entre os modos de movimento "perseguição" e "aleatório" a cada 150 ticks do timer.
-                if(al_get_timer_count(timer)%150 == 0)
-                {
-                    if(!Char[BLINKY]->getChasingStat())
-                    {
-                        Char[BLINKY]->switchCharStats(true, false);
-                    }
-                    else if(!Char[BLINKY]->getRandomStat())
-                    {
-                        Char[BLINKY]->switchCharStats(false, true);
-                    }
-                }
+//                if(al_get_timer_count(timer)%150 == 0)
+//                {
+//                    if(!Char[BLINKY]->getChasingStat())
+//                    {
+//                        Char[BLINKY]->switchCharStats(true, false);
+//                    }
+//                    else if(!Char[BLINKY]->getRandomStat())
+//                    {
+//                        Char[BLINKY]->switchCharStats(false, true);
+//                    }
+//                }
 
                 // Realiza movimentos no modo de perseguição
                 if(Char[BLINKY]->getChasingStat())
@@ -469,36 +468,36 @@ int main(void)
                     }
                 }
                 // Realiza movimentos no modo aleatório
-                else if(Char[BLINKY]->getRandomStat())
-                {
-                    if(Char[BLINKY]->getActiveStat())
-                    {
-                        if(!Char[BLINKY]->getMovingStat() && (!Char[BLINKY]->collision(Char[PINKY]) && !Char[BLINKY]->collision(Char[INKY]) && !Char[BLINKY]->collision(Char[CLYDE])))
-                        {
-                            Char[BLINKY]->Character::moveCharacter(NULL, game_map);
-                        }
-                        else if(Char[BLINKY]->collision(Char[PINKY]) || Char[BLINKY]->collision(Char[INKY]) || Char[BLINKY]->collision(Char[CLYDE]))
-                        {
-                            Char[BLINKY]->setIntention(rand()%4);
-                            Char[BLINKY]->Character::moveCharacter(NULL, game_map);
-                        }
-                    }
-                }
+//                else if(Char[BLINKY]->getRandomStat())
+//                {
+//                    if(Char[BLINKY]->getActiveStat())
+//                    {
+//                        if(!Char[BLINKY]->getMovingStat() && (!Char[BLINKY]->collision(Char[PINKY]) && !Char[BLINKY]->collision(Char[INKY]) && !Char[BLINKY]->collision(Char[CLYDE])))
+//                        {
+//                            Char[BLINKY]->Character::moveCharacter(NULL, game_map);
+//                        }
+//                        else if(Char[BLINKY]->collision(Char[PINKY]) || Char[BLINKY]->collision(Char[INKY]) || Char[BLINKY]->collision(Char[CLYDE]))
+//                        {
+//                            Char[BLINKY]->setIntention(rand()%4);
+//                            Char[BLINKY]->Character::moveCharacter(NULL, game_map);
+//                        }
+//                    }
+//                }
 
                 /** MOVIMENTAÇÃO DO FANTASMA PINKY */
 
-                // Faz com que o Pinky alterne entre os modos de movimento "perseguição" e "aleatório" a cada 200 ticks do timer.
-                if(al_get_timer_count(timer)%150 == 0)
-                {
-                    if(!Char[PINKY]->getChasingStat())
-                    {
-                        Char[PINKY]->switchCharStats(true, false);
-                    }
-                    else if(!Char[PINKY]->getRandomStat())
-                    {
-                        Char[PINKY]->switchCharStats(false, true);
-                    }
-                }
+                // Faz com que o Pinky alterne entre os modos de movimento "perseguição" e "aleatório" a cada 150 ticks do timer (sempre o oposto de Blinky).
+//                if(al_get_timer_count(timer)%150 == 0)
+//                {
+//                    if(!Char[PINKY]->getChasingStat())
+//                    {
+//                        Char[PINKY]->switchCharStats(true, false);
+//                    }
+//                    else if(!Char[PINKY]->getRandomStat())
+//                    {
+//                        Char[PINKY]->switchCharStats(false, true);
+//                    }
+//                }
 
                 // Realiza movimentos no modo de perseguição
                 if(Char[PINKY]->getChasingStat())
@@ -509,21 +508,21 @@ int main(void)
                     }
                 }
                 // Realiza movimentos no modo aleatório
-                else if(Char[PINKY]->getRandomStat())
-                {
-                    if(Char[PINKY]->getActiveStat())
-                    {
-                        if(!Char[PINKY]->getMovingStat() && (!Char[PINKY]->collision(Char[BLINKY]) && !Char[PINKY]->collision(Char[INKY]) && !Char[PINKY]->collision(Char[CLYDE])))
-                        {
-                            Char[PINKY]->Character::moveCharacter(NULL, game_map);
-                        }
-                        else if(Char[PINKY]->collision(Char[BLINKY]) || Char[PINKY]->collision(Char[INKY]) || Char[PINKY]->collision(Char[CLYDE]))
-                        {
-                            Char[PINKY]->setIntention(rand()%4);
-                            Char[PINKY]->Character::moveCharacter(NULL, game_map);
-                        }
-                    }
-                }
+//                else if(Char[PINKY]->getRandomStat())
+//                {
+//                    if(Char[PINKY]->getActiveStat())
+//                    {
+//                        if(!Char[PINKY]->getMovingStat() && (!Char[PINKY]->collision(Char[BLINKY]) && !Char[PINKY]->collision(Char[INKY]) && !Char[PINKY]->collision(Char[CLYDE])))
+//                        {
+//                            Char[PINKY]->Character::moveCharacter(NULL, game_map);
+//                        }
+//                        else if(Char[PINKY]->collision(Char[BLINKY]) || Char[PINKY]->collision(Char[INKY]) || Char[PINKY]->collision(Char[CLYDE]))
+//                        {
+//                            Char[PINKY]->setIntention(rand()%4);
+//                            Char[PINKY]->Character::moveCharacter(NULL, game_map);
+//                        }
+//                    }
+//                }
 
                 /** MOVIMENTAÇÃO DO FANTASMA INKY */ // (sempre random)
 
@@ -698,11 +697,10 @@ int main(void)
                     break;
                 case ALLEGRO_KEY_Y:
                     game_map.setScore(0);
-                    Char[PACMAN]->resetCharacter();
-                    Char[BLINKY]->resetCharacter();
-                    Char[PINKY]->resetCharacter();
-                    Char[INKY]->resetCharacter();
-                    Char[CLYDE]->resetCharacter();
+
+                    for(int i=0; i<qtdChar; i++)
+                        Char[i]->resetCharacter();
+
                     al_set_timer_count(timer, 0);
                     win = gameover = endGame = fastMode = false;
                     break;
@@ -739,9 +737,7 @@ int main(void)
 
     // Desalocando a memória alocada para o array de ponteiros "Character" ...
     for(int i=0; i<qtdChar; i++)
-    {
         delete Char[i];
-    }
 
     al_destroy_sample(startgame_sound);
     al_destroy_sample(waka_sound);

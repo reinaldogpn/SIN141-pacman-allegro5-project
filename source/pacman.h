@@ -9,7 +9,7 @@ public:
     Pacman(void);
     ~Pacman(void);
     void drawCharacter(ALLEGRO_BITMAP*, int);
-    void moveCharacter(Character*, Map&);
+    virtual void moveCharacter(Character*, Map&);
     void deathAnimation(ALLEGRO_DISPLAY*, ALLEGRO_BITMAP*, Map&, bool, bool, int, int);
     void resetCharacter(void);
 };

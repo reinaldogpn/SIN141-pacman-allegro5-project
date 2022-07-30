@@ -1,9 +1,9 @@
 #ifndef INKY_H
 #define INKY_H
 
-#include "character.h"
+#include "randomghost.h"
 
-class Inky : public Character
+class Inky : public RandomGhost
 {
 public:
     Inky(void);

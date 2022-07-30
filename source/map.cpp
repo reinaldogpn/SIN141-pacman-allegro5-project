@@ -8,8 +8,6 @@ Map::Map(void)
     font1 = NULL;
     font2 = NULL;
 
-    tileMap[mapSizeX][mapSizeY] = {0};
-
     score = 0;
     highscore = 0;
     dotCount = 0;

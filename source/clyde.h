@@ -1,9 +1,9 @@
 #ifndef CLYDE_H
 #define CLYDE_H
 
-#include "character.h"
+#include "randomghost.h"
 
-class Clyde : public Character
+class Clyde : public RandomGhost
 {
 public:
     Clyde(void);

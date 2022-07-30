@@ -1,15 +1,13 @@
 #ifndef BLINKY_H
 #define BLINKY_H
 
-#include "character.h"
+#include "smartghost.h"
 
-class Blinky : public Character
+class Blinky : public SmartGhost
 {
 public:
     Blinky(void);
     ~Blinky(void);
-    void drawCharacter(ALLEGRO_BITMAP*, int);
-    void moveCharacter(Character*, Map&);
     void resetCharacter(void);
 };
 

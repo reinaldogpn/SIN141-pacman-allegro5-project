@@ -1,14 +1,13 @@
 #ifndef PINKY_H
 #define PINKY_H
 
-#include "character.h"
+#include "smartghost.h"
 
-class Pinky : public Character
+class Pinky : public SmartGhost
 {
 public:
     Pinky(void);
     ~Pinky(void);
-    void moveCharacter(Character*, Map&);
     void resetCharacter(void);
 };
 

@@ -42,9 +42,10 @@ public:
 
     // métodos virtuais:
     virtual void drawCharacter(ALLEGRO_BITMAP*, int);
-    virtual void moveCharacter(Character*, Map&);
+    virtual void moveCharacter(Character*, Map&)=0;
     virtual void deathAnimation(ALLEGRO_DISPLAY*, ALLEGRO_BITMAP*, Map&, bool, bool, int, int);
     virtual void resetCharacter(void)=0;
+    virtual void switchFleeingMode(bool);
 
     // outros métodos:
     void deployCharacter(void);
@@ -52,7 +53,6 @@ public:
     int eatAction(Map&);
     double calcDistance(int, int, int, int);
     void switchCharStats(bool _chasing, bool _random);
-    void switchFleeingMode(bool);
 
 protected:
     int id;
