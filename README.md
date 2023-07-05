@@ -5,7 +5,7 @@ Um projeto de uma réplica do clássico jogo 2D Pac-Man desenvolvido em C++ util
 #
 O projeto é baseado nos pilares da programação orientada a objetos, tais como:
 
-- Classes
+- Classe
 - Herança
 - Composição
 - Abstração de dados
